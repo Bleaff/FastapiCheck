@@ -1,6 +1,6 @@
 from enum import Enum
 import requests
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -23,10 +23,10 @@ class Question(BaseModel):
     game_id         : int = None
     invalid_count   : int = None
     category        : Category = None
-def pull_data():
-    engine = create_engine('postgresql+psycopg2://postgres:docker@172.17.0.2/my-db')
-    engine.connect()
-    print(engine)
+# def pull_data():
+#     engine = create_engine('postgresql+psycopg2://postgres:docker@172.17.0.2/my-db')
+#     engine.connect()
+#     print(engine)
 
 app = FastAPI()
 #Just parse data to table
@@ -37,7 +37,7 @@ async def get_model(question_num : int):
     parsed = list()
     for it in raw_json:
         parsed.append(Question.parse_obj(it))
-    pull_data()
+    # pull_data()
     return parsed
 
     
