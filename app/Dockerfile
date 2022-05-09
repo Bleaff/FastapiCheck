@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir --upgrade -r code/requirements.txt
 # 
 COPY main.py /code/app/main.py
 # 
-CMD ["python3","-m","uvicorn", "app.main:app"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0"]

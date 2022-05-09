@@ -4,3 +4,8 @@ services:
     build: ./db/
   app :
     build: ./app/
+    volumes:
+      - .:/app
+    ports:
+    - "8008:8000"
+

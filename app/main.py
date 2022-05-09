@@ -13,19 +13,20 @@ db_host = 'db'
 db_port = '5432'
 
 # Connecto to the database
-# db_string = 'postgresql://{}:{}@{}:{}/{}'.format(db_user, db_pass, db_host, db_port, db_name)
-# db = create_engine(db_string)
+db_string = 'postgresql://{}:{}@{}:{}/{}'.format(db_user, db_pass, db_host, db_port, db_name)
+db = create_engine(db_string)
 
-# def add_new_row(id, question, answer, created_at):
-#     # Insert a new number into the 'numbers' table.
-#     db.execute("INSERT INTO quest (id, question, answer, creadet_at) "+\
-#         "VALUES (" + f'{id}, {question}, {answer}, {created_at});')
+def add_new_row(id, question, answer, created_at):
+    # Insert a new number into the 'numbers' table.
+    db.execute("INSERT INTO quest (id, question, answer, creadet_at) "+\
+        "VALUES (" + f'{id}, {question}, {answer}, {created_at});')
 
-# def check_in_table(id):
-#     db.execute(
-#         f"select exists(select 1 from quest where id={id})"
-#     )
-#     return db.fetchone()
+def check_in_table(id):
+    result = db.execute(
+        f"select exists(select 1 from quest where id={id})"
+    )
+    for (r) in result:  
+        return r[0]
 
 class Category(BaseModel):
     id           : int = None
@@ -58,7 +59,9 @@ async def get_model(question_num : int):
     parsed = list()
     for it in raw_json:
         parsed.append(Question.parse_obj(it))
-    return parsed
-    # return check_in_table(parsed[0].id)
+    check_in_table(parsed[0].id)
+
+    print(type(result))
+    return True
 
     
