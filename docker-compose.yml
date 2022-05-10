@@ -2,6 +2,9 @@ version: "3.8"
 services:
   db:
     build: ./db/
+    # volumes:
+    #   - ../2. Init Database:/docker-entrypoint-initdb.d
+    #   - .:/var/lib/postgresql/data
   app :
     build: ./app/
     volumes:
